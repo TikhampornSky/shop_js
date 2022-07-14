@@ -47,10 +47,11 @@ router.post("/insert", (req, res, next) => {
     var name = req.body.name
     var price = req.body.price
     var detail = req.body.detail
+    var image = req.body.image
 
     var query = `INSERT INTO products 
-    (id, name, price, detail) 
-    VALUES ("","${name}","${price}","${detail}")`
+    (id, name, price, detail, image) 
+    VALUES ("","${name}","${price}","${detail}", "${image}")`
     connection.query(query, function(err, data) {
         if (err) {
             throw err

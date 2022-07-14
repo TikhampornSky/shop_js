@@ -1,9 +1,12 @@
 const express = require('express')
 const router = require('./routes/myRouter')
 const path = require('path')
+const fileUpload = require('express-fileupload');
 
 const app = express()       //ใช้งาน express
 app.use(express.json())
+
+app.use(fileUpload());
 
 var session = require('express-session')    //สำหรับสร้าง Flash Message
 var flash = require('connect-flash')
