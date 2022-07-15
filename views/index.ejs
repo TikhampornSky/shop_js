@@ -65,6 +65,7 @@
     </head>
     <body>
         <%- include('navbar') %>
+        <!--
         <div class="container">
             <div class="row my-3">
                 <% Object.values(products_object).forEach(function(item) { %>
@@ -83,7 +84,8 @@
                 <% }) %>
             </div>
         </div>
-
+        -->
+        
         <div class="container">
             <div class="row my-3">
                 <%
@@ -93,7 +95,7 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="product.html"><img class="card-img-top" src="<%= data.image_name %>" alt="" /> <%= data.image_name %></a>
+                        <a href="product.html"><img class="card-img-top" src="/images/products/<%= data.image %>" alt="" /></a>
                         <div class="card-body">
                             <h4 class="card-title">
                                 <a href="product.html"><%= data.name %></a>
