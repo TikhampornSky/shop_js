@@ -3,6 +3,24 @@ const { request } = require('express')
 const express = require('express')
 const router = express.Router()         //router uses for managing url
 //const path = require('path')
+
+//Upload file
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,'./public/images/products') // ตำแหน่งจัดเก็บไฟล์
+    },
+    filename:function(req,file,cb){
+        cb(null,Date.now()+".jpg")//เปลี่ยนชื่อไฟล์ ป้องกันชื่อซ้ำกัน
+    }
+})
+
+//เริ่มต้น upload
+const upload = multer({
+    storage:storage
+})
+
 const connection = require('../database.js')
 
 router.get('/', (req, res) => {
@@ -42,12 +60,12 @@ router.get('/addForm', (req, res, next) => {
     res.render('form', {title:"แบบฟอร์มบันทึกสินค้าใหม่", action:"add"})      
 })
 
-router.post("/insert", (req, res, next) => {
-    console.log(req.body)
+router.post("/insert", upload.single("image"),(req, res) => {
+    //console.log(req.file) 
     var name = req.body.name
     var price = req.body.price
     var detail = req.body.detail
-    var image = req.body.image
+    var image = req.file.filename
 
     var query = `INSERT INTO products 
     (id, name, price, detail, image) 
